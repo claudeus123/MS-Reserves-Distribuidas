@@ -23,12 +23,19 @@ export class PlacesService {
   }
 
   async findAll() {
-    return await this.placeRepository.find();
+    return await this.placeRepository.find({
+      relations: ['items']
+    });
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} place`;
-  // }
+  async findOne(name: string) {
+    const institution = await this.placeRepository.findOne({
+      where: {
+        name: name
+      }
+    });
+    return institution;
+  }
 
   // update(id: number, updatePlaceDto: UpdatePlaceDto) {
   //   return `This action updates a #${id} place`;

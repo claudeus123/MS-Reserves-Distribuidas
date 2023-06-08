@@ -13,6 +13,6 @@ import { InstitutionsModule } from '../institutions/institutions.module';
   ],
   controllers: [PlacesController],
   providers: [PlacesService],
-  // exports: [PlacesService]
+  exports: [PlacesService]
 })
 export class PlacesModule {}

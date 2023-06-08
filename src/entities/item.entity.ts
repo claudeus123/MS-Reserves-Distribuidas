@@ -17,7 +17,7 @@ export class Item {
     description: string;
 
     @Column({nullable: true})
-    price: number;
+    price: number = 0;
 
     @ManyToOne(() => Place, place => place.items)
     place: Place;
