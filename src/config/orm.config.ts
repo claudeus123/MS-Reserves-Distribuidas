@@ -4,6 +4,9 @@ import { DataSource } from "typeorm";
 import { Institution } from "../entities/institution.entity";
 import { Item } from "../entities/item.entity";
 import { Place } from "../entities/place.entity";
+import { Schedule } from "../entities/schedule.entity";
+import { Reserve } from "../entities/reserves.entity";
+import { Type } from "../entities/type.entity";
 
 
 
@@ -21,7 +24,7 @@ const DatabaseConfig: DataSourceOptions = {
     database: process.env.TYPEORM_DATABASE,
     synchronize: process.env.TYPEORM_SYNCHRONIZE === "true",
     logging: process.env.TYPEORM_LOGGING === "true",
-    entities: [Institution, Item, Place],
+    entities: [Institution, Item, Place, Reserve, Schedule, Type],
     migrations: [__dirname + '/../migrations/*{.ts,.js}'],
 }
 

@@ -7,6 +7,9 @@ import { DataSourceConfig } from './config/orm.config';
 import { InstitutionsModule } from './modules/institutions/institutions.module';
 import { PlacesModule } from './modules/places/places.module';
 import { ItemsModule } from './modules/items/items.module';
+import { SchedulesModule } from './modules/schedules/schedules.module';
+import { TypesModule } from './modules/types/types.module';
+import { ReservesModule } from './modules/reserves/reserves.module';
 
 @Module({
   imports: [
@@ -19,7 +22,10 @@ import { ItemsModule } from './modules/items/items.module';
   }),
   InstitutionsModule,
   PlacesModule,
-  ItemsModule
+  ItemsModule,
+  SchedulesModule,
+  TypesModule,
+  ReservesModule
   ],
   controllers: [AppController],
   providers: [AppService],

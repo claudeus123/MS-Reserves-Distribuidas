@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, JoinColumn } from "typeorm";
 import { Institution } from "./institution.entity";
 import { Place } from "./place.entity";
+import { Type } from "./type.entity";
 
 
 @Entity({
@@ -22,5 +23,9 @@ export class Item {
     @ManyToOne(() => Place, place => place.items)
     place: Place;
 
+    @OneToOne(() => Type)
+    @JoinColumn()
+    type: Type;
 
+    
 }
