@@ -13,8 +13,15 @@ export class ReservesService {
         @InjectRepository(Reserve) private reserveRepository: Repository<Reserve>,
         @InjectRepository(Item) private itemRepository: Repository<Item>,
         private itemsService: ItemsService
-    ){}
-
+        ){}
+        
+    async removeReserveById(id: number) {
+        const reserve = await this.reserveRepository.findOne({
+            where: { id: id },
+        })
+        reserve.available = true;
+        return await this.reserveRepository.save(reserve);
+    }
     async createReserve(createReserveDto: CreateReserveDto){
         const item = await this.itemsService.findOne(createReserveDto?.item_name);
 

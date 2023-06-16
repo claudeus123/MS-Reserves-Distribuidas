@@ -16,6 +16,11 @@ export class ReservesController {
     return await this.reservesService.removeReserve(createReserveDto);
   }
 
+  @Patch(':id')
+  async removeById(@Param('id') id: number){
+    return await this.reservesService.removeReserveById(id);
+  }
+
   @Get(':clientId')
   async get(@Param('clientId') clientId: number){
     return await this.reservesService.get(clientId);
