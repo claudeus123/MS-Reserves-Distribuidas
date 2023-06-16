@@ -23,7 +23,10 @@ export class PlacesService {
     }
     
     async findInCity(city: string) {
-      
+      return await this.placeRepository.find({
+        where: { city: city},
+        relations: ['items']
+      });
     }
   async findAll() {
     return await this.placeRepository.find({
