@@ -8,20 +8,23 @@ import { Place } from 'src/entities/place.entity';
 
 @Injectable()
 export class PlacesService {
-
+  
   constructor(
     @InjectRepository(Institution) private institutionRepository: Repository<Institution>,
     @InjectRepository(Place) private placeRepository: Repository<Place>,
     private institutionService: InstitutionsService
-  ){}
-  async create(institutionName: string, createPlaceDto: CreatePlaceDto) {
-    const institution = await this.institutionService.findOne(institutionName);
-
-    const place = this.placeRepository.create(createPlaceDto);
-    place.institution = institution;
-    return await this.placeRepository.save(place);
-  }
-
+    ){}
+    async create(institutionName: string, createPlaceDto: CreatePlaceDto) {
+      const institution = await this.institutionService.findOne(institutionName);
+      
+      const place = this.placeRepository.create(createPlaceDto);
+      place.institution = institution;
+      return await this.placeRepository.save(place);
+    }
+    
+    async findInCity(city: string) {
+      
+    }
   async findAll() {
     return await this.placeRepository.find({
       relations: ['items']

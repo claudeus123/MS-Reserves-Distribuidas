@@ -10,6 +10,7 @@ import { ItemsModule } from './modules/items/items.module';
 import { SchedulesModule } from './modules/schedules/schedules.module';
 import { TypesModule } from './modules/types/types.module';
 import { ReservesModule } from './modules/reserves/reserves.module';
+import { AvailabilityModule } from './modules/availability/availability.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { ReservesModule } from './modules/reserves/reserves.module';
   ItemsModule,
   SchedulesModule,
   TypesModule,
-  ReservesModule
+  ReservesModule,
+  AvailabilityModule
   ],
   controllers: [AppController],
   providers: [AppService],

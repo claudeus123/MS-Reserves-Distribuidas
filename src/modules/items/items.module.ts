@@ -5,13 +5,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Place } from 'src/entities/place.entity';
 import { Item } from 'src/entities/item.entity';
 import { PlacesModule } from '../places/places.module';
+import { Schedule } from 'src/entities/schedule.entity';
+import { Type } from 'src/entities/type.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Item, Place]),
+    TypeOrmModule.forFeature([Item, Place, Schedule, Type]),
     PlacesModule
   ],
   controllers: [ItemsController],
-  providers: [ItemsService]
+  providers: [ItemsService],
+  exports: [ItemsService]
 })
 export class ItemsModule {}

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, OneToOne, ManyToOne } from "typeorm";
 import { Place } from "./place.entity";
 import { Schedule } from "./schedule.entity";
 import { Type } from "./type.entity";
@@ -12,8 +12,7 @@ export class Reserve {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToOne(() => Item)
-    @JoinColumn()
+    @ManyToOne(()=> Item, item => item.reserves )
     item: Item
 
     @Column()
@@ -22,16 +21,16 @@ export class Reserve {
     @Column()
     available: boolean = false;
 
-    @Column()
+    @Column({nullable:true})
     start_time: string;
 
-    @Column()
+    @Column({nullable:true})
     end_time: string;
 
-    @Column()
+    @Column({nullable:true})
     start_date: string;
     
-    @Column()
+    @Column({nullable:true})
     end_date: string;
 
     // @OneToMany(() => Place, place => place.institution)

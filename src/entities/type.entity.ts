@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from "typeorm";
 import { Place } from "./place.entity";
 import { Schedule } from "./schedule.entity";
+import { Item } from "./item.entity";
 
 
 @Entity({
@@ -19,5 +20,6 @@ export class Type {
     @OneToMany(() => Schedule, schedule => schedule.type)
     schedules: Schedule[];
     
-
+    // @OneToMany(() => Item, item => item.type)
+    // item: Item[]
 }

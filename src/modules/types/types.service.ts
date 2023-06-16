@@ -31,7 +31,7 @@ export class TypesService {
 
     
     reservationType.schedules.push(schedule)
-    await this.typeRepository.save(reservationType);
+    return await  this.typeRepository.save(reservationType);
   }
   async findAll(){
     return await this.typeRepository.find({

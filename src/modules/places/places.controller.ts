@@ -17,6 +17,11 @@ export class PlacesController {
     return this.placesService.findAll();
   }
 
+  @Get(':city')
+  async findInCity(@Param('city') city: string) {
+    return this.placesService.findInCity(city);
+  }
+
   // @Get(':id')
   // findOne(@Param('id') id: string) {
   //   return this.placesService.findOne(+id);

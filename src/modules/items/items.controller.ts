@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ItemsService } from './items.service';
 import { CreateItemDto } from './dto/create-item.dto';
+import { AddTypeDto } from './dto/add-type.dto';
 // import { UpdateItemDto } from './dto/update-item.dto';
 
 @Controller('items')
@@ -15,6 +16,17 @@ export class ItemsController {
   @Get()
   findAll() {
     return this.itemsService.findAll();
+  }
+
+  @Get(':item')
+  findOne (@Param('item') item: string) {
+    return this.itemsService.findOne(item);
+  }
+
+  @Patch()
+  async addType(@Body() addTypeDto: AddTypeDto){
+    // console.log("hola")
+    return await this.itemsService.addType(addTypeDto);
   }
 
   // @Get(':id')

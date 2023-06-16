@@ -23,7 +23,6 @@
     "m:r": "npm run typeorm:init migration:run",
     "m:r:u": "npm run typeorm:init migration:revert",
     "m:c": "npm run typeorm:init migration:create"
-
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
@@ -32,6 +31,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^9.0.1",
+    "date-fns": "^2.30.0",
     "pg": "^8.11.0",
     "postgres": "^3.3.5",
     "reflect-metadata": "^0.1.13",
