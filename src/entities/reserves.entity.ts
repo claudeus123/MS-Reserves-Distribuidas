@@ -3,6 +3,7 @@ import { Place } from "./place.entity";
 import { Schedule } from "./schedule.entity";
 import { Type } from "./type.entity";
 import { Item } from "./item.entity";
+import { format } from 'date-fns';
 
 
 @Entity({
@@ -28,7 +29,7 @@ export class Reserve {
     end_time: string;
 
     @Column({nullable:true})
-    start_date: string;
+    start_date: string = format(new Date(), 'yyyy-MM-dd');
     
     @Column({nullable:true})
     end_date: string;

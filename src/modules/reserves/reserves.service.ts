@@ -6,6 +6,7 @@ import { CreateReserveDto } from './dto/create-reserve.dto';
 import { Item } from 'src/entities/item.entity';
 import { ItemsService } from '../items/items.service';
 import { UpdateReserveDto } from './dto/update-reserve.dto';
+import { addDays, format } from 'date-fns';
 
 @Injectable()
 export class ReservesService {
@@ -26,6 +27,13 @@ export class ReservesService {
         const item = await this.itemsService.findOne(createReserveDto?.item_name);
 
         const reserve =  this.reserveRepository.create(createReserveDto);
+        // if(item.type.schedules[0].day_quantity > 0){
+
+        //     const currentDate = new Date();
+        //     const finalDate = format(addDays(currentDate, 7),'yyyy-MM-dd');
+        //     reserve.end_date = finalDate;
+        // }
+        
         reserve.item = item;
         return await this.reserveRepository.save(reserve);
     }
