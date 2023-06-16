@@ -68,6 +68,13 @@ export class ItemsService {
   //   return `This action updates a #${id} item`;
   // }
 
+  async findById(id: number) {
+    return await this.itemRepository.findOne({
+      where: {id: id}, 
+      relations: ['type','reserves']
+    })
+  }
+
   // remove(id: number) {
   //   return `This action removes a #${id} item`;
   // }
