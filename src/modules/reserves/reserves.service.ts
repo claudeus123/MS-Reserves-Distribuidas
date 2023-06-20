@@ -57,7 +57,7 @@ export class ReservesService {
         })
 
         if(!blockReserve || !dayReserve) return null;
-
+        blockReserve.cancelled = true;
         if (blockReserve.item.name === updateReserveDto.item_name){
             blockReserve.available = true;
             return await this.reserveRepository.save(blockReserve);

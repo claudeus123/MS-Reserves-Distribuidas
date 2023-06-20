@@ -34,6 +34,9 @@ export class Reserve {
     @Column({nullable:true})
     end_date: string;
 
+    @Column({nullable:true})
+    cancelled: boolean = false;
+
     // @OneToMany(() => Place, place => place.institution)
     // places: Place[];
 
