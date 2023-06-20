@@ -17,6 +17,7 @@ export class AvailabilityService {
       })
       const currentDate = new Date();
       
+      if(itemObject.reserves.length === 0) return true;
       if (!itemObject.reserves[itemObject.reserves.length - 1].available) return false;
       if(!blockSchedule) {
         if(isBefore(currentDate, new Date(itemObject.reserves[itemObject.reserves.length - 1].start_date)) 

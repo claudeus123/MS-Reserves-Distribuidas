@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, DefaultValuePipe, ParseIntPipe } from '@nestjs/common';
 import { ItemsService } from './items.service';
 import { CreateItemDto } from './dto/create-item.dto';
 import { AddTypeDto } from './dto/add-type.dto';
+import { IPaginationOptions } from 'nestjs-typeorm-paginate';
 // import { UpdateItemDto } from './dto/update-item.dto';
 
 @Controller('items')
@@ -14,8 +15,16 @@ export class ItemsController {
   }
 
   @Get()
-  findAll() {
-    return this.itemsService.findAll();
+  // @ApiPaginatedResponse()
+  async findAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10
+  ) {
+    const options: IPaginationOptions = {
+      limit,
+      page
+    }
+    return await this.itemsService.paginate(options);
   }
 
   @Get(':id')

@@ -8,6 +8,7 @@ import { Place } from 'src/entities/place.entity';
 import { PlacesService } from '../places/places.service';
 import { AddTypeDto } from './dto/add-type.dto';
 import { Type } from 'src/entities/type.entity';
+import { IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class ItemsService {
@@ -75,6 +76,13 @@ export class ItemsService {
     })
   }
 
+
+  async paginate(options: IPaginationOptions){
+    const qb = this.itemRepository.createQueryBuilder('q')
+    qb.orderBy('q.id', 'ASC')
+
+    return paginate<Item>(qb, options);
+  }
   // remove(id: number) {
   //   return `This action removes a #${id} item`;
   // }
