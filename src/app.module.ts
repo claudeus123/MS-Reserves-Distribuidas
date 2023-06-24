@@ -11,6 +11,8 @@ import { SchedulesModule } from './modules/schedules/schedules.module';
 import { TypesModule } from './modules/types/types.module';
 import { ReservesModule } from './modules/reserves/reserves.module';
 import { AvailabilityModule } from './modules/availability/availability.module';
+import { AutomatizationModule } from './modules/automatization/automatization.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -27,7 +29,9 @@ import { AvailabilityModule } from './modules/availability/availability.module';
   SchedulesModule,
   TypesModule,
   ReservesModule,
-  AvailabilityModule
+  AvailabilityModule,
+  AutomatizationModule,
+  ScheduleModule.forRoot()
   ],
   controllers: [AppController],
   providers: [AppService],
