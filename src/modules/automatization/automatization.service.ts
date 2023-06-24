@@ -20,7 +20,8 @@ export class AutomatizationService {
         reserves.forEach((reserve) => {
             if (!isEqual(new Date(), new Date(reserve.start_date)) && reserve.end_date === null) reserve.available = true;
             // if (reserve.end_date === null && isEqual(new Date(), new Date(reserve.start_date)) && reserve.end_time.replace(':','') < actualTime) reserve.available = true;
-            if(reserve.end_date !== null && isAfter(new Date(), new Date(reserve.end_date))) reserve.available = true;
+            // if(reserve.end_date !== null && isAfter(new Date(), new Date(reserve.end_date))) reserve.available = true;
+            if(reserve.end_date !== null && isAfter(new Date(), new Date(reserve.end_date)) || (reserve.end_date !== null && isEqual(new Date(), new Date(reserve.end_date)) && reserve.end_time.replace(':','') < actualTime)) reserve.available = true;
             // console.log(reserve.end_date);
             // console.log(isEqual(new Date(), new Date(reserve.start_date)))
             // console.log(reserve.end_time.replace(':','') < actualTime)
