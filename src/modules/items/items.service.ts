@@ -8,7 +8,7 @@ import { Place } from 'src/entities/place.entity';
 import { PlacesService } from '../places/places.service';
 import { AddTypeDto } from './dto/add-type.dto';
 import { Type } from 'src/entities/type.entity';
-import { IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
+import { IPaginationMeta, IPaginationOptions, Pagination, paginate } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class ItemsService {
@@ -18,7 +18,7 @@ export class ItemsService {
     @InjectRepository(Type) private typeRepository: Repository<Type>,
     private placeService: PlacesService
     ){}
-    async create(placeName: string, createItemDto: CreateItemDto) {
+    async create(placeName: string, createItemDto: CreateItemDto): Promise<Item> {
       const place = await this.placeService.findOne(placeName);
       
       const item = this.itemRepository.create(createItemDto);
@@ -26,7 +26,7 @@ export class ItemsService {
       return await this.itemRepository.save(item);
     }
     
-    async findOne(item: string) {
+    async findOne(item: string): Promise<Item> {
       // console.log(item);
       const itemObject = await this.itemRepository.findOne({
         where: {name: item}, 
@@ -41,13 +41,13 @@ export class ItemsService {
       // console.log(itemObject);
       return itemObject;
     }
-  async findAll() {
+  async findAll(): Promise<Item[]> {
     return await this.itemRepository.find({
       relations: ['type','reserves']
     });
   }
 
-  async addType(addTypeDto: AddTypeDto) {
+  async addType(addTypeDto: AddTypeDto): Promise<Item> {
     const type = await this.typeRepository.findOne({
       where: {name: addTypeDto.typeName},
       relations: ['schedules']
@@ -69,15 +69,15 @@ export class ItemsService {
   //   return `This action updates a #${id} item`;
   // }
 
-  async findById(id: number) {
+  async findById(id: number): Promise<Item> {
     return await this.itemRepository.findOne({
       where: {id: id}, 
       relations: ['type','reserves']
     })
   }
 
-
-  async paginate(options: IPaginationOptions){
+  
+  async paginate(options: IPaginationOptions): Promise<Pagination<Item, IPaginationMeta>>{
     const qb = this.itemRepository.createQueryBuilder('q')
     qb.orderBy('q.id', 'ASC')
 

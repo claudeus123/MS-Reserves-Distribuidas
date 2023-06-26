@@ -13,12 +13,12 @@ export class TypesService {
     @InjectRepository(Schedule) private scheduleRepository: Repository<Schedule>
   ){}
 
-  async create(createTypeDto: CreateTypeDto) {
+  async create(createTypeDto: CreateTypeDto): Promise<Type> {
     const type = this.typeRepository.create(createTypeDto);
     return await this.typeRepository.save(type);
   }
 
-  async addSchedule(type: string, scheduleName: string){
+  async addSchedule(type: string, scheduleName: string): Promise<Type>{
     const reservationType = await this.typeRepository.findOne({
       where: {name: type}, relations: ['schedules']
     })
@@ -33,7 +33,7 @@ export class TypesService {
     reservationType.schedules.push(schedule)
     return await  this.typeRepository.save(reservationType);
   }
-  async findAll(){
+  async findAll(): Promise<Type[]>{
     return await this.typeRepository.find({
       relations: ["schedules"]
     });

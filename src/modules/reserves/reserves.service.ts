@@ -16,14 +16,14 @@ export class ReservesService {
         private itemsService: ItemsService
         ){}
         
-    async removeReserveById(id: number) {
+    async removeReserveById(id: number): Promise<Reserve>  {
         const reserve = await this.reserveRepository.findOne({
             where: { id: id },
         })
         reserve.available = true;
         return await this.reserveRepository.save(reserve);
     }
-    async createReserve(createReserveDto: CreateReserveDto){
+    async createReserve(createReserveDto: CreateReserveDto): Promise<Reserve>{
         const item = await this.itemsService.findOne(createReserveDto?.item_name);
 
         const reserve =  this.reserveRepository.create(createReserveDto);
@@ -38,7 +38,7 @@ export class ReservesService {
         return await this.reserveRepository.save(reserve);
     }
 
-    async removeReserve(updateReserveDto: UpdateReserveDto){
+    async removeReserve(updateReserveDto: UpdateReserveDto): Promise<Reserve>{
         const blockReserve = await this.reserveRepository.findOne({
             where: {
                 client_id: updateReserveDto.client_id,
@@ -72,7 +72,7 @@ export class ReservesService {
 
     }
 
-    async get(clientId: number){
+    async get(clientId: number): Promise<Reserve[]>{
         return await this.reserveRepository.find({
             where: {
                 client_id: clientId,

@@ -2,7 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query, DefaultValueP
 import { ItemsService } from './items.service';
 import { CreateItemDto } from './dto/create-item.dto';
 import { AddTypeDto } from './dto/add-type.dto';
-import { IPaginationOptions } from 'nestjs-typeorm-paginate';
+import { IPaginationMeta, IPaginationOptions, Pagination } from 'nestjs-typeorm-paginate';
+import { Item } from 'src/entities/item.entity';
 // import { UpdateItemDto } from './dto/update-item.dto';
 
 @Controller('items')
@@ -10,8 +11,8 @@ export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
   @Post(':place')
-  create(@Param('place') place: string, @Body() createItemDto: CreateItemDto) {
-    return this.itemsService.create(place, createItemDto);
+  async create(@Param('place') place: string, @Body() createItemDto: CreateItemDto): Promise<Item> {
+    return await this.itemsService.create(place, createItemDto);
   }
 
   @Get()
@@ -19,7 +20,7 @@ export class ItemsController {
   async findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10
-  ) {
+  ): Promise<Pagination<Item, IPaginationMeta>> {
     const options: IPaginationOptions = {
       limit,
       page
@@ -28,12 +29,12 @@ export class ItemsController {
   }
 
   @Get(':id')
-  findOne (@Param('id') id: number) {
-    return this.itemsService.findById(id);
+  async findOne (@Param('id') id: number): Promise<Item> {
+    return await this.itemsService.findById(id);
   }
 
   @Patch()
-  async addType(@Body() addTypeDto: AddTypeDto){
+  async addType(@Body() addTypeDto: AddTypeDto): Promise<Item>{
     // console.log("hola")
     return await this.itemsService.addType(addTypeDto);
   }

@@ -10,7 +10,7 @@ export class PendingService {
     @InjectRepository(Reserve) private reserveRepository: Repository<Reserve>
   ){}
 
-  async changePending(id: number) {
+  async changePending(id: number): Promise<Reserve>{
     
     const reserve = await this.reserveRepository.findOne({
       where: { id: id },

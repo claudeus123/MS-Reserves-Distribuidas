@@ -12,7 +12,7 @@ export class AutomatizationService {
     ){}
 
     @Cron('0 * * * *') 
-    async updateReserves() {
+    async updateReserves(): Promise<void> {
         const reserves = await this.reserveRepository.find();
         // console.log(reserves[0].end_time.replace(':',''));
         const actualTime = new Date().toString().split(' ')[4].split(':')[0] + new Date().toString().split(' ')[4].split(':')[1]

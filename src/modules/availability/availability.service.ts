@@ -9,7 +9,7 @@ export class AvailabilityService {
     constructor(private itemService: ItemsService){}
 
 
-    async getAvailability(item: string, schedule: string){
+    async getAvailability(item: string, schedule: string): Promise<boolean>{
       const itemObject = await this.itemService.findOne(item);
       let blockSchedule: boolean = true;
       itemObject.type.schedules.forEach((schedule) => {

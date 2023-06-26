@@ -14,7 +14,7 @@ export class PlacesService {
     @InjectRepository(Place) private placeRepository: Repository<Place>,
     private institutionService: InstitutionsService
     ){}
-    async create(institutionName: string, createPlaceDto: CreatePlaceDto) {
+    async create(institutionName: string, createPlaceDto: CreatePlaceDto): Promise<Place> {
       const institution = await this.institutionService.findOne(institutionName);
       
       const place = this.placeRepository.create(createPlaceDto);
@@ -22,19 +22,19 @@ export class PlacesService {
       return await this.placeRepository.save(place);
     }
     
-    async findInCity(city: string) {
+    async findInCity(city: string): Promise<Place[]>  {
       return await this.placeRepository.find({
         where: { city: city},
         relations: ['items']
       });
     }
-  async findAll() {
+  async findAll(): Promise<Place[]>  {
     return await this.placeRepository.find({
       relations: ['items']
     });
   }
 
-  async findOne(name: string) {
+  async findOne(name: string): Promise<Place>  {
     const institution = await this.placeRepository.findOne({
       where: {
         name: name

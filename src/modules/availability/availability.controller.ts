@@ -9,7 +9,7 @@ export class AvailabilityController {
   constructor(private readonly availabilityService: AvailabilityService) {}
 
   @Get(':item/:schedule')
-  async getAvailability(@Param('item') item: string, @Param('schedule') schedule: string){
+  async getAvailability(@Param('item') item: string, @Param('schedule') schedule: string): Promise<boolean>{
     return await this.availabilityService.getAvailability(item, schedule);
   }
 

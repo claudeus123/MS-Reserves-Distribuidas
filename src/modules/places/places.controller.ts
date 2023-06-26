@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { PlacesService } from './places.service';
 import { CreatePlaceDto } from './dto/create-place.dto';
+import { Place } from 'src/entities/place.entity';
 // import { UpdatePlaceDto } from './dto/update-place.dto';
 
 @Controller('places')
@@ -8,17 +9,17 @@ export class PlacesController {
   constructor(private readonly placesService: PlacesService) {}
 
   @Post(':institution')
-  create(@Param('institution') institution: string, @Body() createPlaceDto: CreatePlaceDto) {
-    return this.placesService.create(institution, createPlaceDto);
+  async create(@Param('institution') institution: string, @Body() createPlaceDto: CreatePlaceDto): Promise<Place>  {
+    return await this.placesService.create(institution, createPlaceDto);
   }
 
   @Get()
-  findAll() {
-    return this.placesService.findAll();
+  async findAll(): Promise<Place[]>  {
+    return await this.placesService.findAll();
   }
 
   @Get(':city')
-  async findInCity(@Param('city') city: string) {
+  async findInCity(@Param('city') city: string): Promise<Place[]>  {
     return this.placesService.findInCity(city);
   }
 

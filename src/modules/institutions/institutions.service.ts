@@ -16,13 +16,13 @@ export class InstitutionsService {
     return await this.institutionRepository.save(institution);
   }
 
-  async findAll() {
+  async findAll(): Promise<Institution[]> {
     return await this.institutionRepository.find({
       relations: ['places']
     });
   }
 
-  async findOne(name: string) {
+  async findOne(name: string): Promise<Institution> {
     const institution = await this.institutionRepository.findOne({
       where: {
         name: name

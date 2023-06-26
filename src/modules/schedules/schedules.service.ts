@@ -12,12 +12,12 @@ export class SchedulesService {
     
   ){}
 
-  async create(createScheduleDto: CreateScheduleDto) {
+  async create(createScheduleDto: CreateScheduleDto): Promise<Schedule> {
       const schedule = this.scheduleRepository.create(createScheduleDto);
       return await this.scheduleRepository.save(schedule);
   }
 
-  async findAll(){
+  async findAll(): Promise<Schedule[]>{
     return await this.scheduleRepository.find();
   }
 

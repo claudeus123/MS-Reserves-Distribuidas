@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { InstitutionsService } from './institutions.service';
 import { CreateInstitutionDto } from './dto/create-institution.dto';
+import { Institution } from 'src/entities/institution.entity';
 // import { UpdateInstitutionDto } from './dto/update-institution.dto';
 
 @Controller('institutions')
@@ -8,13 +9,13 @@ export class InstitutionsController {
   constructor(private readonly institutionsService: InstitutionsService) {}
 
   @Post()
-  create(@Body() createInstitutionDto: CreateInstitutionDto) {
-    return this.institutionsService.create(createInstitutionDto);
+  async create(@Body() createInstitutionDto: CreateInstitutionDto): Promise<Institution> {
+    return await this.institutionsService.create(createInstitutionDto);
   }
 
   @Get()
-  findAll() {
-    return this.institutionsService.findAll();
+  async findAll(): Promise<Institution[]> {
+    return await this.institutionsService.findAll();
   }
 
   // @Get(':id')
