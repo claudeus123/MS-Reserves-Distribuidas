@@ -8,7 +8,7 @@ export class PendingController {
   constructor(private readonly pendingService: PendingService) {}
 
   @Post(':id')
-  async create(@Param('id') id: number): Promise<Reserve> {
+  async changePending(@Param('id') id: number): Promise<Reserve> {
     return await this.pendingService.changePending(id);
   }
 

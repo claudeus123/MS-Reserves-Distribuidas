@@ -75,8 +75,7 @@ export class ReservesService {
     async get(clientId: number): Promise<Reserve[]>{
         return await this.reserveRepository.find({
             where: {
-                client_id: clientId,
-                available: false
+                client_id: clientId
             }, relations: ['item']
         });
         
