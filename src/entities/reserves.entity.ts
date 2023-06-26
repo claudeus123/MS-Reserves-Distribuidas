@@ -37,6 +37,9 @@ export class Reserve {
     @Column({nullable:true})
     cancelled: boolean = false;
 
+    @Column({nullable:true})
+    pending: boolean = true;
+
     // @OneToMany(() => Place, place => place.institution)
     // places: Place[];
 

@@ -13,6 +13,7 @@ import { ReservesModule } from './modules/reserves/reserves.module';
 import { AvailabilityModule } from './modules/availability/availability.module';
 import { AutomatizationModule } from './modules/automatization/automatization.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { PendingModule } from './modules/pending/pending.module';
 
 @Module({
   imports: [
@@ -31,7 +32,8 @@ import { ScheduleModule } from '@nestjs/schedule';
   ReservesModule,
   AvailabilityModule,
   AutomatizationModule,
-  ScheduleModule.forRoot()
+  ScheduleModule.forRoot(),
+  PendingModule
   ],
   controllers: [AppController],
   providers: [AppService],
