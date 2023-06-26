@@ -18,6 +18,7 @@ export class PendingService {
     
     if(!reserve) return null;
     reserve.pending = false;
+    reserve.available = true;
     
     return this.reserveRepository.save(reserve);
   }
