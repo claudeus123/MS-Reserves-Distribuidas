@@ -20,6 +20,7 @@ export class ReservesService {
         const reserve = await this.reserveRepository.findOne({
             where: { id: id },
         })
+        reserve.cancelled = true;
         reserve.available = true;
         return await this.reserveRepository.save(reserve);
     }
