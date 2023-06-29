@@ -70,10 +70,19 @@ export class ItemsService {
   // }
 
   async findById(id: number): Promise<Item> {
-    return await this.itemRepository.findOne({
+    const itemObject = await this.itemRepository.findOne({
       where: {id: id}, 
       relations: ['type','reserves']
     })
+    // console.log(itemObject)
+    const type = await this.typeRepository.findOne({
+      where: {name: itemObject.type.name},
+      relations: ['schedules']
+    })
+    itemObject.type = type;
+
+
+    return itemObject;
   }
 
   
